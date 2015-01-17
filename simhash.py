@@ -11,7 +11,7 @@ sys.setdefaultencoding('utf-8')
 
 class SimHash(object):
 	"""docstring for SimHash"""
-	def __init__(self, object, topK = 20, bitslength = 64):
+	def __init__(self, object, topK = 25, bitslength = 64):
 		#super(SimHash, self).__init__()
 		self.topK = topK
 		self.bitslength = bitslength
@@ -21,7 +21,10 @@ class SimHash(object):
 		return str(self.hash)
 
 	def toBinString(self):
-		pass
+		binstr = bin(self.hash)[2:]
+		if len(binstr) < self.bitslength:
+			binstr = '0' * (self.bitslength - len(binstr)) + binstr
+		return binstr
 
 	def simhash(self, object):
 		array = [0] * self.bitslength
@@ -60,8 +63,13 @@ class SimHash(object):
 			distance += 1
 		return distance
 
-	def similarity(self):
-		pass
+	def similarity(self,other):
+		a = float(self.hash)
+		b = float(other.hash)
+		if a > b : 
+			return b / a
+		else: 
+			return a / b
 
 
 if __name__ == '__main__':
@@ -76,7 +84,12 @@ if __name__ == '__main__':
 	sh2 = SimHash(s2)
 	sh3 = SimHash(s3)
 
-	print sh0, sh0.hammingDistance(sh1)
-	print sh0, sh0.hammingDistance(sh2)
-	print sh2, sh2.hammingDistance(sh3)
-	print sh2, sh2.hammingDistance(sh0)
+	print sh0.toBinString(), sh0
+	print sh1.toBinString(), sh1
+	print sh2.toBinString(), sh2
+	print sh3.toBinString(), sh3
+
+	print "distance of s0 and s1 is", sh0.hammingDistance(sh1), sh0.similarity(sh1)
+	print "distance of s0 and s2 is", sh0.hammingDistance(sh2), sh0.similarity(sh2)
+	print "distance of s2 and s0 is", sh2.hammingDistance(sh0), sh2.similarity(sh0)
+	print "distance of s2 and s3 is", sh2.hammingDistance(sh3), sh2.similarity(sh3)
