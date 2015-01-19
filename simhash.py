@@ -84,12 +84,16 @@ if __name__ == '__main__':
 	sh2 = SimHash(s2)
 	sh3 = SimHash(s3)
 
-	print sh0.toBinString(), sh0
-	print sh1.toBinString(), sh1
-	print sh2.toBinString(), sh2
-	print sh3.toBinString(), sh3
+	print "s0:",sh0.toBinString(), sh0
+	print "s1:",sh1.toBinString(), sh1
+	print "s2:",sh2.toBinString(), sh2
+	print "s3:",sh3.toBinString(), sh3
 
-	print "distance of s0 and s1 is", sh0.hammingDistance(sh1), sh0.similarity(sh1)
-	print "distance of s0 and s2 is", sh0.hammingDistance(sh2), sh0.similarity(sh2)
-	print "distance of s2 and s0 is", sh2.hammingDistance(sh0), sh2.similarity(sh0)
-	print "distance of s2 and s3 is", sh2.hammingDistance(sh3), sh2.similarity(sh3)
+	print "distance of s0 and s1 is", sh0.hammingDistance(sh1), ", similarity:", sh0.similarity(sh1)
+	print "distance of s0 and s2 is", sh0.hammingDistance(sh2), ", similarity:", sh0.similarity(sh2)
+	print "distance of s0 and s3 is", sh0.hammingDistance(sh3), ", similarity:", sh0.similarity(sh3)
+
+	print "distance of s1 and s2 is", sh1.hammingDistance(sh2), ", similarity:", sh1.similarity(sh2)
+	print "distance of s1 and s3 is", sh1.hammingDistance(sh3), ", similarity:", sh1.similarity(sh3)
+
+	print "distance of s2 and s3 is", sh2.hammingDistance(sh3), ", similarity:", sh2.similarity(sh3)
